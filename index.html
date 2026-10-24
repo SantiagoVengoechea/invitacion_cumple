@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Tengo una pregunta para ti ❤️">
+<meta property="og:description" content="Ábrelo, es importante 🎂">
+<meta name="theme-color" content="#1d0f2b">
+<title>Invitación de Cumpleaños</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: una sola escena centrada, noche de cumpleaños con velas; la tarjeta final reemplaza la pregunta */
+:root{
+  --night:#1d0f2b;
+  --night-2:#2c1640;
+  --rose:#ff5d8f;
+  --candle:#ffc857;
+  --cream:#fff4e6;
+  --muted:#c9b3d9;
+  --display:"Caprasimo", Georgia, serif;
+  --body:"Bricolage Grotesque", system-ui, sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:radial-gradient(120% 80% at 50% 0%, var(--night-2) 0%, var(--night) 60%);
+  background-color:var(--night);
+  color:var(--cream);
+  font-family:var(--body);
+  overflow:hidden;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+  -webkit-tap-highlight-color:transparent;
+}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0}
+.stage{
+  position:relative;z-index:1;
+  min-height:100%;
+  display:grid;place-items:center;
+  padding-block:24px;
+}
+.panel{width:100%;max-width:520px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px}
+
+/* pastel con velas */
+.cake{width:150px;height:auto;filter:drop-shadow(0 12px 30px rgba(255,93,143,.35))}
+.flame{transform-origin:50% 100%;animation:flicker 1.1s ease-in-out infinite alternate}
+.flame:nth-of-type(2){animation-delay:.3s}
+.flame:nth-of-type(3){animation-delay:.6s}
+@keyframes flicker{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.85,1.12) rotate(3deg)}}
+
+.eyebrow{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--candle);font-weight:600}
+h1{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(2rem, 8vw, 3.2rem);line-height:1.08;margin:0;
+  text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--rose)}
+.sub{color:var(--muted);font-size:1.05rem;margin:0;max-width:34ch;line-height:1.5}
+
+.buttons{display:flex;gap:16px;align-items:center;justify-content:center;min-height:90px;flex-wrap:wrap}
+button{
+  font-family:var(--body);font-weight:800;font-size:1.15rem;
+  border:0;border-radius:999px;cursor:pointer;
+  padding:16px 38px;
+  transition:transform .25s cubic-bezier(.3,1.6,.5,1), box-shadow .2s;
+}
+button:focus-visible{outline:3px solid var(--candle);outline-offset:4px}
+#yes{
+  background:var(--rose);color:var(--night);
+  box-shadow:0 8px 0 #b8325e, 0 14px 30px rgba(255,93,143,.45);
+}
+#yes:hover{transform:translateY(-2px) scale(var(--grow,1))}
+#yes:active{box-shadow:0 3px 0 #b8325e}
+#no{
+  background:transparent;color:var(--muted);
+  border:2px solid rgba(201,179,217,.45);
+  padding:14px 32px;
+  touch-action:none;user-select:none;
+}
+#no.runaway{position:fixed;z-index:5;transition:left .28s cubic-bezier(.3,1.4,.5,1), top .28s cubic-bezier(.3,1.4,.5,1)}
+.hint{min-height:1.4em;color:var(--candle);font-size:.95rem;margin:0}
+
+/* tarjeta final */
+.ticket{
+  width:100%;
+  background:var(--cream);color:var(--night);
+  border-radius:22px;
+  padding:28px 24px 24px;
+  position:relative;
+  box-shadow:0 30px 60px rgba(0,0,0,.45);
+  animation:pop .7s cubic-bezier(.3,1.5,.5,1) both;
+}
+.ticket::before,.ticket::after{
+  content:"";position:absolute;top:58%;width:26px;height:26px;border-radius:50%;
+  background:var(--night);
+}
+.ticket::before{left:-13px}.ticket::after{right:-13px}
+@keyframes pop{from{transform:scale(.6) rotate(-4deg);opacity:0}to{transform:none;opacity:1}}
+.ticket h2{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,6.5vw,2.3rem);margin:0 0 6px;color:#c2275a;text-wrap:balance}
+.ticket .lead{margin:0 0 20px;font-size:1.1rem;font-weight:600}
+.details{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  border-top:2px dashed rgba(29,15,43,.25);
+  padding-top:20px;text-align:left;
+}
+.d{display:flex;flex-direction:column;gap:2px;min-width:0}
+.d.wide{grid-column:1 / -1}
+.d span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#8a5a9e;font-weight:600}
+.d strong{font-size:1.1rem;font-weight:800;overflow-wrap:anywhere}
+.sign{margin:20px 0 0;font-family:var(--display);font-size:1.2rem;color:#c2275a}
+
+@media (max-width:420px){button{padding:14px 30px;font-size:1.05rem}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="sky"></canvas>
+
+<main class="stage">
+  <section class="panel" id="ask">
+    <svg class="cake" viewBox="0 0 160 150" aria-hidden="true">
+      <ellipse class="flame" cx="50" cy="22" rx="6" ry="11" fill="#ffc857"/>
+      <ellipse class="flame" cx="80" cy="16" rx="6" ry="11" fill="#ffc857"/>
+      <ellipse class="flame" cx="110" cy="22" rx="6" ry="11" fill="#ffc857"/>
+      <rect x="47" y="32" width="6" height="26" rx="3" fill="#fff4e6"/>
+      <rect x="77" y="26" width="6" height="32" rx="3" fill="#fff4e6"/>
+      <rect x="107" y="32" width="6" height="26" rx="3" fill="#fff4e6"/>
+      <rect x="22" y="58" width="116" height="40" rx="10" fill="#ff5d8f"/>
+      <path d="M22 70 q14 14 29 0 t29 0 t29 0 t29 0 v-2 a10 10 0 0 0 -10 -10 h-96 a10 10 0 0 0 -10 10z" fill="#fff4e6"/>
+      <rect x="10" y="96" width="140" height="42" rx="10" fill="#c2275a"/>
+      <path d="M10 108 q17 14 35 0 t35 0 t35 0 t35 0 v-2 a10 10 0 0 0 -10 -10 h-120 a10 10 0 0 0 -10 10z" fill="#ffc857"/>
+      <rect x="0" y="136" width="160" height="10" rx="5" fill="#3d2156"/>
+    </svg>
+    <div class="eyebrow" id="eyebrow">Feliz cumpleaños</div>
+    <h1 id="question">¿Quieres salir conmigo a <em>celebrar</em> tu día?</h1>
+    <p class="sub" id="sub">Tengo un plan para ti. Solo hay una respuesta correcta.</p>
+    <div class="buttons">
+      <button id="yes" type="button">Sí</button>
+      <button id="no" type="button">No</button>
+    </div>
+    <p class="hint" id="hint" aria-live="polite"></p>
+  </section>
+
+  <section class="panel" id="done" hidden>
+    <div class="ticket">
+      <h2>¡Sabía que dirías que sí! ❤️</h2>
+      <p class="lead" id="lead"></p>
+      <div class="details">
+        <div class="d"><span>Fecha</span><strong id="fFecha"></strong></div>
+        <div class="d"><span>Hora</span><strong id="fHora"></strong></div>
+        <div class="d wide"><span>Lugar</span><strong id="fLugar"></strong></div>
+        <div class="d wide"><span>Vestimenta</span><strong id="fRopa"></strong></div>
+      </div>
+      <p class="sign" id="firma"></p>
+    </div>
+  </section>
+</main>
+
+<script>
+/* ✏️ EDITA AQUÍ los detalles de la cita */
+const CITA = {
+  nombre: "gorda",
+  fecha:  "Jueves 29 de octubre",
+  hora:   "8:00 PM",
+  lugar:  "Sorpresa 🤫",
+  ropa:   "Bella y extraordinaria ✨",
+  firma:  "Con amor, Santiago"
+};
+
+document.getElementById("lead").textContent = `¡Prepárate, ${CITA.nombre}! Paso a buscarte a las ${CITA.hora}.`;
+document.getElementById("fFecha").textContent = CITA.fecha;
+document.getElementById("fHora").textContent = CITA.hora;
+document.getElementById("fLugar").textContent = CITA.lugar;
+document.getElementById("fRopa").textContent = CITA.ropa;
+document.getElementById("firma").textContent = CITA.firma;
+
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const hint = document.getElementById("hint");
+const frases = ["¿Segura? 🥺","Piénsalo bien…","Ese botón no funciona 😌","Inténtalo otra vez 😏","¡Nop!","El Sí te está esperando 💕","Ya, dale al Sí 😂"];
+let intentos = 0;
+
+function huir(e){
+  if(e && e.cancelable) e.preventDefault();
+  const r = no.getBoundingClientRect();
+  if(!no.classList.contains("runaway")){
+    no.style.left = r.left + "px"; no.style.top = r.top + "px";
+    no.classList.add("runaway");
+    void no.offsetWidth;
+  }
+  const m = 16, w = r.width, h = r.height;
+  const maxX = innerWidth - w - m, maxY = innerHeight - h - m;
+  let x, y, tries = 0;
+  const y0 = yes.getBoundingClientRect();
+  do{
+    x = m + Math.random() * Math.max(0, maxX - m);
+    y = m + Math.random() * Math.max(0, maxY - m);
+    tries++;
+  }while(tries < 30 && (Math.hypot(x - r.left, y - r.top) < 120 ||
+        (x < y0.right + 10 && x + w > y0.left - 10 && y < y0.bottom + 10 && y + h > y0.top - 10)));
+  no.style.left = x + "px"; no.style.top = y + "px";
+  hint.textContent = frases[intentos % frases.length];
+  intentos++;
+  yes.style.setProperty("--grow", Math.min(1 + intentos * .08, 1.6));
+  yes.style.transform = `scale(${Math.min(1 + intentos * .08, 1.6)})`;
+}
+no.addEventListener("pointerenter", huir);
+no.addEventListener("pointerdown", huir);
+no.addEventListener("touchstart", huir, {passive:false});
+no.addEventListener("click", huir);
+no.addEventListener("focus", huir);
+
+yes.addEventListener("click", () => {
+  document.getElementById("ask").hidden = true;
+  no.hidden = true;
+  document.getElementById("done").hidden = false;
+  confeti(220);
+  setTimeout(() => confeti(120), 900);
+});
+
+/* cielo: estrellas suaves + confeti */
+const cv = document.getElementById("sky"), ctx = cv.getContext("2d");
+let W, H, stars = [], bits = [];
+function size(){ const d = devicePixelRatio || 1; W = innerWidth; H = innerHeight; cv.width = W*d; cv.height = H*d; ctx.setTransform(d,0,0,d,0,0);
+  stars = Array.from({length: Math.round(W*H/9000)}, () => ({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4+.3, p:Math.random()*6}));
+}
+size(); addEventListener("resize", size);
+const colores = ["#ff5d8f","#ffc857","#fff4e6","#b388eb","#ff8fab"];
+function confeti(n){
+  for(let i=0;i<n;i++) bits.push({x:W/2+(Math.random()-.5)*80, y:H*.45, vx:(Math.random()-.5)*14, vy:-Math.random()*14-4,
+    s:Math.random()*8+5, rot:Math.random()*6, vr:(Math.random()-.5)*.3, c:colores[i%colores.length], heart:Math.random()<.25});
+}
+function heart(x,y,s){ ctx.beginPath(); ctx.moveTo(x,y+s*.3); ctx.bezierCurveTo(x,y,x-s*.5,y,x-s*.5,y+s*.3); ctx.bezierCurveTo(x-s*.5,y+s*.6,x,y+s*.8,x,y+s);
+  ctx.bezierCurveTo(x,y+s*.8,x+s*.5,y+s*.6,x+s*.5,y+s*.3); ctx.bezierCurveTo(x+s*.5,y,x,y,x,y+s*.3); ctx.fill(); }
+const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let t = 0;
+function loop(){
+  t += .02; ctx.clearRect(0,0,W,H);
+  for(const s of stars){ ctx.globalAlpha = .35 + .35*Math.sin(t+s.p); ctx.fillStyle="#fff4e6"; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,7); ctx.fill(); }
+  ctx.globalAlpha = 1;
+  bits = bits.filter(b => b.y < H + 40);
+  for(const b of bits){
+    b.vy += .32; b.vx *= .99; b.x += b.vx; b.y += b.vy; b.rot += b.vr;
+    ctx.fillStyle = b.c;
+    if(b.heart){ heart(b.x,b.y,b.s*1.4); }
+    else { ctx.save(); ctx.translate(b.x,b.y); ctx.rotate(b.rot); ctx.fillRect(-b.s/2,-b.s/4,b.s,b.s/2); ctx.restore(); }
+  }
+  if(!quieto || bits.length) requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
